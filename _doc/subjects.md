@@ -7,7 +7,6 @@
 - url deep link into certain screen & with value pass in
 - QR Code deeplink?
 
-
 - axios async call
 
 - GPS?
@@ -19,3 +18,6 @@
 - Utilizing Material Design components?
 - update app notification?
 - rate app notification?
+
+
+- 3rd level navigation
