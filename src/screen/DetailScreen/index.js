@@ -29,10 +29,14 @@ export default class DetailScreen extends Component{
   }
 
   render() {
+    const { id } = this.props.navigation.state.params;
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Text>Detail</Text>
+        <Text>BEG---</Text>
+        <Text>{id}</Text>
+        <Text>END---</Text>
         <TouchableOpacity onPress={this.handleClick}>
 
         <View style={styles.button}>

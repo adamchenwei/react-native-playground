@@ -5,7 +5,9 @@
 - loading screen
 - local phone cache
 - url deep link into certain screen & with value pass in
+- Depp link url
 - QR Code deeplink?
+
 
 - axios async call
 

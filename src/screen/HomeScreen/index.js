@@ -7,12 +7,16 @@ import {
   View,
   FlatList,
   Button,
+  Linking,
 } from 'react-native';
 import Listing from './../../components/Listing';
 
 export default class HomeScreen extends Component {
   constructor() {
     super();
+    this.state = {
+      url: '',
+    }
     this.onPressItemCallback = this.onPressItemCallback.bind(this);
   }
 
@@ -21,10 +25,42 @@ export default class HomeScreen extends Component {
     navigate(ScreenName, Value);
   }
 
+  // Router Setting BEG
+  componentDidMount() { // B
+    if (Platform.OS === 'android') {
+      Linking.getInitialURL().then(url => {
+        this.navigate(url);
+      });
+    } else {
+        Linking.addEventListener('url', this.handleOpenURL);
+      }
+    }
+    
+    componentWillUnmount() { // C
+      Linking.removeEventListener('url', this.handleOpenURL);
+    }
+    handleOpenURL = (event) => { // D
+      this.navigate(event.url);
+    }
+    navigate = (url) => { // E
+      const { navigate } = this.props.navigation;
+      const route = url.replace(/.*?:\/\//g, '');
+      const id = route.match(/\/([^\/]+)\/?$/)[1];
+      const routeName = route.split('/')[0];
+    
+      if (routeName === 'people') {
+        navigate('People', { id, name: 'chris' })
+      };
+    }
+  // Router Setting END
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+        <Text>BEG</Text>
+        <Text>{this.state.url}</Text>
+        <Text>END</Text>
         {/* <Button
           title="Go to Detail"
           onPress={() =>
