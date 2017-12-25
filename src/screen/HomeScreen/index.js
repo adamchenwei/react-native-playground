@@ -12,6 +12,7 @@ import {
 import Listing from './../../components/Listing';
 import Records from './../../store/records';
 import ProductionMockList from './../../store/records/production';
+import detailCache from './../../store/ui/detailCache';
 
 export default class HomeScreen extends Component {
   static navigationOptions = { // A
@@ -54,11 +55,19 @@ export default class HomeScreen extends Component {
       console.log('nav remove listner 1');
       Linking.removeEventListener('url', this.handleOpenURL);
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+      console.log('should update HOME......')
+      console.log(nextProps);
+      return true;
+    }
+
     handleOpenURL = (event) => { // D
       console.log('nav trigger 2');
       console.log(event);
       this.navigate(event.url);
     }
+
     navigate = (url) => { // E
       const { navigate } = this.props.navigation;
       const route = url.replace(/.*?:\/\//g, '');
@@ -70,6 +79,7 @@ export default class HomeScreen extends Component {
         console.log(this.recordsInstance);
         console.log(id);
         console.log(navigate);
+        detailCache.set({ id, content: this.recordsInstance.getARecord(id) });
         navigate('Detail', { id, content: this.recordsInstance.getARecord(id) });
       } else {
         console.log('WRONG ROUTE')
@@ -83,12 +93,13 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text> I am at HOME SCREEN </Text>
+        <Text>STATE URL -> {this.state.url}</Text>
         <Text>BEG</Text>
         <Text>ROUTE TEST HERE -> {JSON.stringify(this.state.routeName)}</Text>
         <Text>THIS.PROPS->{JSON.stringify(this.props)}</Text>
         <Text>THIS.PROPS.NAVIGATION->{JSON.stringify(this.props.navigation)}</Text>
         {/* <Text>recordsInstance->{JSON.stringify(recordsInstance)}</Text> */}
-        <Text>{this.state.url}</Text>
+
         <Text>END</Text>
         <Text>Listing vvv</Text>
         {/* <Button

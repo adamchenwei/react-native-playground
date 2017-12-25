@@ -9,11 +9,13 @@ import {
   Linking,
   TouchableOpacity,
 } from 'react-native';
+import detailCache from './../../store/ui/detailCache';
 
 export default class DetailScreen extends Component{
   constructor() {
     super();
     console.log('On Detail....');
+    console.log(this);
     this.handleUrlClick = this.handleUrlClick.bind(this);
   }
 
@@ -29,10 +31,19 @@ export default class DetailScreen extends Component{
     });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('should update DETAIL......')
+    console.log(nextProps);
+    return true;
+  }
   render() {
     console.log('Detail Rendering...')
     //const { id } = this.props.navigation.state.params;
-    const params = this.props.navigation.state.params;
+    let params = this.props.navigation.state.params;
+    if (!this.props.navigation.state.params) {
+      params = detailCache.get();
+    }
+
     return (
       <View style={styles.container}>
         <Text>WE ARE AT DETAIL PAGE!!!</Text>
@@ -51,6 +62,7 @@ export default class DetailScreen extends Component{
         <Text>{JSON.stringify(params)}</Text>
       </View>
     );
+
   }
 }
 
