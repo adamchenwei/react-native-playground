@@ -79,7 +79,10 @@ export default class HomeScreen extends Component {
         console.log(this.recordsInstance);
         console.log(id);
         console.log(navigate);
+
+        //TODO: its a hack for dup deeplink, need to be resolved!!!
         detailCache.set({ id, content: this.recordsInstance.getARecord(id) });
+        
         navigate('Detail', { id, content: this.recordsInstance.getARecord(id) });
       } else {
         console.log('WRONG ROUTE')

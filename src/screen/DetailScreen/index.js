@@ -40,6 +40,8 @@ export default class DetailScreen extends Component{
     console.log('Detail Rendering...')
     //const { id } = this.props.navigation.state.params;
     let params = this.props.navigation.state.params;
+
+    //TODO: its a hack for dup deeplink, need to be resolved!!!
     if (!this.props.navigation.state.params) {
       params = detailCache.get();
     }
