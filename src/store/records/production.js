@@ -3,8 +3,8 @@ import content from './content';
 export default [
   new Record(
     'a0',//id
-    'Making Ribaa (interest) permissible in the west',//title
-    'making-ribaa-interest-permissible-in-the-west',//appRouteCustom
+    'interest',//title
+    'west-interest',//appRouteCustom
     '',//appRouteDefault
     //tags
     [
@@ -16,7 +16,7 @@ export default [
     //references
     [
       {
-        url: 'https://abdurrahman.org/2011/01/07/making-ribaa-interest-permissible-in-the-west/',
+        url: 'https://google.com/interest',
         note: '',
       },
     ],
@@ -30,24 +30,17 @@ export default [
   ),
   new Record(
     'a1',//id
-    'O Muslim, Be Cautious From Whom You Take Your Religion',//title
-    'o-muslim-be-cautious-from-whom-you-take-your-religion',//appRouteCustom
+    'whom',//title
+    'whom',//appRouteCustom
     '',//appRouteDefault
     //tags
     [
       'advise',
-      'naseehah',
-      'salafiyyah',
-      'refutation',
-      'deviation',
-      'salaf',
-      'methodology',
-      'manhaj',
     ],
     //references
     [
       {
-        url: 'http://www.tawheedfirst.com/o-muslim-be-cautious-from-whom-you-take-your-religion/',
+        url: 'http://www.google.com/whom',
         note: '',
       },
     ],

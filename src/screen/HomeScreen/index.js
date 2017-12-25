@@ -10,7 +10,8 @@ import {
   Linking,
 } from 'react-native';
 import Listing from './../../components/Listing';
-import records from './../../store/records';
+import Records from './../../store/records';
+import ProductionMockList from './../../store/records/production';
 
 export default class HomeScreen extends Component {
   static navigationOptions = { // A
@@ -18,6 +19,7 @@ export default class HomeScreen extends Component {
   };
   constructor() {
     super();
+    this.recordsInstance = new Records(ProductionMockList);
     this.state = {
       url: '',
       routeName: '',
@@ -27,24 +29,34 @@ export default class HomeScreen extends Component {
 
   onPressItemCallback(ScreenName, id) {
     const { navigate } = this.props.navigation;
-    navigate(ScreenName, { id, content: records[id] });
+    console.log('nav 2');
+    console.log(this.recordsInstance);
+    console.log(id);
+    console.log(navigate);
+    console.log(ScreenName);
+    navigate(ScreenName, { id, content: this.recordsInstance.getARecord(id) });
   }
 
   // Router Setting BEG
   componentDidMount() { // B
     if (Platform.OS === 'android') {
       Linking.getInitialURL().then(url => {
+        console.log('nav trigger 1');
         this.navigate(url);
       });
     } else {
+        console.log('nav add listner 1');
         Linking.addEventListener('url', this.handleOpenURL);
       }
     }
 
     componentWillUnmount() { // C
+      console.log('nav remove listner 1');
       Linking.removeEventListener('url', this.handleOpenURL);
     }
     handleOpenURL = (event) => { // D
+      console.log('nav trigger 2');
+      console.log(event);
       this.navigate(event.url);
     }
     navigate = (url) => { // E
@@ -54,20 +66,31 @@ export default class HomeScreen extends Component {
       const routeName = route.split('/')[0];
       this.setState({routeName});
       if (routeName === 'Detail') {
-        navigate('Detail', { id, content: records[id] });
+        console.log('nav 1');
+        console.log(this.recordsInstance);
+        console.log(id);
+        console.log(navigate);
+        navigate('Detail', { id, content: this.recordsInstance.getARecord(id) });
+      } else {
+        console.log('WRONG ROUTE')
       };
     }
   // Router Setting END
 
   render() {
     const { navigate } = this.props.navigation;
+    const records = this.recordsInstance.getAll();
     return (
       <View style={styles.container}>
+        <Text> I am at HOME SCREEN </Text>
         <Text>BEG</Text>
-        <Text>ROUTE HERE -> {JSON.stringify(this.state.routeName)}</Text>
-        <Text>{JSON.stringify(this.props.navigation)}</Text>
+        <Text>ROUTE TEST HERE -> {JSON.stringify(this.state.routeName)}</Text>
+        <Text>THIS.PROPS->{JSON.stringify(this.props)}</Text>
+        <Text>THIS.PROPS.NAVIGATION->{JSON.stringify(this.props.navigation)}</Text>
+        {/* <Text>recordsInstance->{JSON.stringify(recordsInstance)}</Text> */}
         <Text>{this.state.url}</Text>
         <Text>END</Text>
+        <Text>Listing vvv</Text>
         {/* <Button
           title="Go to Detail"
           onPress={() =>

@@ -13,6 +13,7 @@ import {
 export default class DetailScreen extends Component{
   constructor() {
     super();
+    console.log('On Detail....');
     this.handleUrlClick = this.handleUrlClick.bind(this);
   }
 
@@ -29,14 +30,16 @@ export default class DetailScreen extends Component{
   }
 
   render() {
+    console.log('Detail Rendering...')
     //const { id } = this.props.navigation.state.params;
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Text>Detail</Text>
+        <Text>WE ARE AT DETAIL PAGE!!!</Text>
         <Text>BEG---</Text>
-        <Text>{JSON.stringify(this.props.navigation)}</Text>
-        {/* <Text>{JSON.stringify()}</Text> */}
+        <Text>ALL PROP ---> {JSON.stringify(this.props)}</Text>
+        <Text>navigation PROP ---> {JSON.stringify(this.props.navigation)}</Text>
+        <Text>PRAMS STATE---> {JSON.stringify(params)}</Text>
         <Text>END---</Text>
         <TouchableOpacity onPress={this.handleUrlClick}>
 

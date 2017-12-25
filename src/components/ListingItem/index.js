@@ -21,7 +21,7 @@ export default class ListingItem extends Component {
     return (
       <Text
         onPress={() =>
-          onPressItemCallback('Detail', item.id)
+          onPressItemCallback('Detail', item)
         }>{item.content.title}</Text>
     );
   }

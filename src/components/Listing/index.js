@@ -14,6 +14,7 @@ export default class Listing extends Component {
     const {
       onPressItemCallback,
     } = this.props;
+    console.log(this.props.collection)
     return (
       <FlatList
         data={this.props.collection}

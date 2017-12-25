@@ -1,6 +1,6 @@
-import record from './mock';
+// import record from './mock';
 import ProductionList from './production';
-
+import Record from './Record';
 function generateList(item, key) {
   let list = [];
   const max = 200;
@@ -26,4 +26,22 @@ function generateRecord(item, key) {
 // ];
 
 const theList = ProductionList;
-export default theList;
+
+class Records {
+  constructor(records) {
+    this.list = records;
+  }
+  getAll() {
+    return this.list;
+  }
+  getARecord(recordId) {
+    const resultList = this.list.filter((item) => {
+      return item.id === recordId;
+    });
+
+    return resultList.length === 1
+      ? resultList[0]
+      : new Record()
+  }
+}
+export default Records;
