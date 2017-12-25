@@ -10,19 +10,24 @@ import {
   Linking,
 } from 'react-native';
 import Listing from './../../components/Listing';
+import records from './../../store/records';
 
 export default class HomeScreen extends Component {
+  static navigationOptions = { // A
+    title: 'Home',
+  };
   constructor() {
     super();
     this.state = {
       url: '',
+      routeName: '',
     }
     this.onPressItemCallback = this.onPressItemCallback.bind(this);
   }
 
-  onPressItemCallback(ScreenName, Value) {
+  onPressItemCallback(ScreenName, id) {
     const { navigate } = this.props.navigation;
-    navigate(ScreenName, Value);
+    navigate(ScreenName, { id, content: records[id] });
   }
 
   // Router Setting BEG
@@ -35,7 +40,7 @@ export default class HomeScreen extends Component {
         Linking.addEventListener('url', this.handleOpenURL);
       }
     }
-    
+
     componentWillUnmount() { // C
       Linking.removeEventListener('url', this.handleOpenURL);
     }
@@ -47,9 +52,9 @@ export default class HomeScreen extends Component {
       const route = url.replace(/.*?:\/\//g, '');
       const id = route.match(/\/([^\/]+)\/?$/)[1];
       const routeName = route.split('/')[0];
-    
-      if (routeName === 'people') {
-        navigate('People', { id, name: 'chris' })
+      this.setState({routeName});
+      if (routeName === 'Detail') {
+        navigate('Detail', { id, content: records[id] });
       };
     }
   // Router Setting END
@@ -59,6 +64,8 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text>BEG</Text>
+        <Text>ROUTE HERE -> {JSON.stringify(this.state.routeName)}</Text>
+        <Text>{JSON.stringify(this.props.navigation)}</Text>
         <Text>{this.state.url}</Text>
         <Text>END</Text>
         {/* <Button
@@ -68,6 +75,7 @@ export default class HomeScreen extends Component {
           }
         /> */}
         <Listing
+          collection={records}
           onPressItemCallback={this.onPressItemCallback}
         />
       </View>

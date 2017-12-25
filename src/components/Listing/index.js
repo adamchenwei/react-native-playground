@@ -7,9 +7,8 @@ import {
   View,
   FlatList,
 } from 'react-native';
-
-import records from './../../store/records';
 import ListingItem from './../ListingItem';
+
 export default class Listing extends Component {
   render() {
     const {
@@ -17,7 +16,7 @@ export default class Listing extends Component {
     } = this.props;
     return (
       <FlatList
-        data={records}
+        data={this.props.collection}
         keyExtractor={item => item.id}
         renderItem={({item}) => <ListingItem
           onPressItemCallback={onPressItemCallback}

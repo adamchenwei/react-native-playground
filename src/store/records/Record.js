@@ -20,16 +20,18 @@ export default class Record {
       (collectedBy) => new CollectedBy(collectedBy.userId, collectedBy.date));
     return {
       id,
-      title,
-      appRoute: new AppRoute(appRouteCustom, appRouteDefault),
-      tags: tags,
-      references: referencesInstance,
-      collectionInfo: collectionInfoInstance,
-      cachedContent: {
-        content: '',
-        collectedByUserId: '',
-        collectedTime: 0,
-      }, //new CachedContent(id)
+      content: {
+        title,
+        appRoute: new AppRoute(appRouteCustom, appRouteDefault),
+        tags: tags,
+        references: referencesInstance,
+        collectionInfo: collectionInfoInstance,
+        cachedContent: {
+          content: '',
+          collectedByUserId: '',
+          collectedTime: 0,
+        }, //new CachedContent(id)
+      }
     }
   };
 };

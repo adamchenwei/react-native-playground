@@ -13,10 +13,10 @@ import {
 export default class DetailScreen extends Component{
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.handleUrlClick = this.handleUrlClick.bind(this);
   }
 
-  handleClick = () => {
+  handleUrlClick = () => {
     const url = this.props.navigation.state.params.references[0].url;
 
     Linking.canOpenURL(url).then(supported => {
@@ -29,18 +29,19 @@ export default class DetailScreen extends Component{
   }
 
   render() {
-    const { id } = this.props.navigation.state.params;
+    //const { id } = this.props.navigation.state.params;
     const params = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Text>Detail</Text>
         <Text>BEG---</Text>
-        <Text>{id}</Text>
+        <Text>{JSON.stringify(this.props.navigation)}</Text>
+        {/* <Text>{JSON.stringify()}</Text> */}
         <Text>END---</Text>
-        <TouchableOpacity onPress={this.handleClick}>
+        <TouchableOpacity onPress={this.handleUrlClick}>
 
         <View style={styles.button}>
-          <Text style={styles.text}>Open {params.title}</Text>
+          {/* <Text style={styles.text}>Open {params.title}</Text> */}
         </View>
         
         </TouchableOpacity>
