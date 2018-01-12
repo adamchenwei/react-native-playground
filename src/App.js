@@ -18,6 +18,7 @@ import {
 
 import HomeScreen from './screen/HomeScreen';
 import DetailScreen from './screen/DetailScreen';
+import TestScreen from './screen/TestScreen';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -32,4 +33,5 @@ const instructions = Platform.select({
 export default StackNavigator({
   Home: { screen: HomeScreen },
   Detail: { screen: DetailScreen },
+  test: { screen: TestScreen },
 });
